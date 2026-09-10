@@ -4,4 +4,14 @@ Distributed field operations platform built with NestJS, React, messaging and GC
 
 > Status: project foundation in progress.
 
-This repository is developed incrementally through GitHub Issues and Pull Requests. Each delivery records its decisions, implementation, tests, problems and learning notes.
+## Purpose
+
+Trevvos FieldOps is a practical engineering laboratory and a useful platform for managing field-service operations. It is developed incrementally through Issues and Pull Requests so every decision remains traceable and reusable as study material.
+
+## Documentation
+
+- [Product vision](docs/product/vision.md)
+- [Initial backlog](docs/product/backlog.md)
+- [Engineering workflow](docs/engineering/workflow.md)
+- [Architecture](docs/architecture/README.md)
+- [Contributing](CONTRIBUTING.md)

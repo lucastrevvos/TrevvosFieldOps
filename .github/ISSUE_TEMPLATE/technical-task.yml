@@ -1,0 +1,39 @@
+name: Technical task
+description: Architecture, infrastructure, refactoring or engineering work
+title: "[TECH] "
+labels: []
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      placeholder: "- [ ] Task"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: "- [ ] Verifiable outcome"
+    validations:
+      required: true
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisions to record
+  - type: textarea
+    id: out
+    attributes:
+      label: Out of scope
