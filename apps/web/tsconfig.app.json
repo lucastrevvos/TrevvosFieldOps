@@ -1,0 +1,8 @@
+{
+  "extends": "@trevvos-fieldops/typescript-config/react.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.app.tsbuildinfo",
+    "types": ["vite/client", "vitest/globals"]
+  },
+  "include": ["src"]
+}

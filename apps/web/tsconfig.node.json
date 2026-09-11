@@ -1,0 +1,11 @@
+{
+  "extends": "@trevvos-fieldops/typescript-config/node.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "composite": true,
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.cache/tsconfig.node.tsbuildinfo",
+    "types": ["node"]
+  },
+  "include": ["vite.config.ts"]
+}
