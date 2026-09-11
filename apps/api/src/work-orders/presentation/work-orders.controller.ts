@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Inject, Post } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 
 import { CreateWorkOrder } from '../application/create-work-order.js';
@@ -19,7 +19,7 @@ class CreatedWorkOrderResponse {
 @ApiTags('work-orders')
 @Controller('work-orders')
 export class WorkOrdersController {
-  constructor(private readonly createWorkOrder: CreateWorkOrder) {}
+  constructor(@Inject(CreateWorkOrder) private readonly createWorkOrder: CreateWorkOrder) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
