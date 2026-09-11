@@ -1,0 +1,35 @@
+# Architecture
+
+## Initial target
+
+The target architecture contains:
+
+- React web application built with Vite
+- NestJS API gateway
+- Identity service
+- Work Orders service
+- Dispatch service
+- Notification and Webhook service
+- PostgreSQL for durable relational data
+- Redis for ephemeral coordination and caching
+- RabbitMQ locally and GCP Pub/Sub in cloud environments
+
+## Evolution strategy
+
+Services will be introduced through vertical product flows. A service exists only when its independent responsibility, data ownership or scaling characteristics justify the operational cost.
+
+Synchronous REST communication is used when the caller needs an immediate result. Events are used for asynchronous workflows and integration reactions.
+
+## Required engineering mechanisms
+
+- Transactional outbox
+- Idempotent consumers
+- Retry with bounded exponential backoff
+- Dead-letter handling
+- Correlation identifiers
+- Health, readiness and liveness checks
+- Structured logging, metrics and distributed tracing
+
+## Architecture Decision Records
+
+Significant decisions live in [ADR files](adr/0000-template.md). An ADR describes context, options, consequences and status rather than merely stating the chosen technology.
