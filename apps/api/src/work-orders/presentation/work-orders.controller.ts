@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { ApiCreatedResponse, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiCreatedResponse, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 
 import { CreateWorkOrder } from '../application/create-work-order.js';
 import type { WorkOrderProps } from '../domain/work-order.js';
@@ -24,6 +24,7 @@ export class WorkOrdersController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Create a field-service work order' })
+  @ApiBody({ type: CreateWorkOrderDto })
   @ApiCreatedResponse({ type: CreatedWorkOrderResponse })
   async create(@Body() body: CreateWorkOrderDto): Promise<CreatedWorkOrderResponse> {
     const created: WorkOrderProps = await this.createWorkOrder.execute({
