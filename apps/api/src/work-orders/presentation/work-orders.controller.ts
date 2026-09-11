@@ -6,13 +6,13 @@ import type { WorkOrderProps } from '../domain/work-order.js';
 import { CreateWorkOrderDto } from './create-work-order.dto.js';
 
 class CreatedWorkOrderResponse {
-  @ApiProperty({ format: 'uuid' })
+  @ApiProperty({ format: 'uuid', type: String })
   id!: string;
 
-  @ApiProperty({ example: 'PENDING_DISPATCH' })
+  @ApiProperty({ example: 'PENDING_DISPATCH', type: String })
   status!: string;
 
-  @ApiProperty({ format: 'date-time' })
+  @ApiProperty({ format: 'date-time', type: String })
   createdAt!: string;
 }
 
