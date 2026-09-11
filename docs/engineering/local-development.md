@@ -45,6 +45,7 @@ pnpm dev
 
 - Web: `http://localhost:5173`
 - API health: `http://localhost:3000/api/health`
+- Swagger UI: `http://localhost:3000/docs`
 
 Vite proxies browser requests from `/api` to the local NestJS server. The browser therefore uses
 the same relative API path that can later be routed by a production gateway.
@@ -76,6 +77,34 @@ the resulting `.env` file or real credentials.
 
 See [local infrastructure](local-infrastructure.md) for service addresses, lifecycle commands,
 persistence and troubleshooting.
+
+After starting PostgreSQL, apply the database migration:
+
+```bash
+pnpm db:migrate
+```
+
+Create a work order after starting the API:
+
+```bash
+curl --request POST http://localhost:3000/api/work-orders \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "title": "Inspect refrigeration unit",
+    "description": "Unit is intermittently losing temperature.",
+    "priority": "HIGH",
+    "scheduledFor": "2026-10-20T13:30:00.000Z",
+    "address": {
+      "line1": "Rua das Gaivotas, 120",
+      "city": "Florianópolis",
+      "state": "SC",
+      "postalCode": "88058-500"
+    }
+  }'
+```
+
+Use a future value for `scheduledFor`. A successful request returns `201 Created`, the generated
+UUID, the creation timestamp and the initial `PENDING_DISPATCH` status.
 
 ## Troubleshooting
 
