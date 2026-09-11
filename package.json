@@ -21,6 +21,7 @@
     "infra:status": "docker compose ps",
     "infra:up": "docker compose up -d --wait",
     "lint": "turbo run lint && prettier --check .",
+    "messaging:worker": "pnpm --filter @trevvos-fieldops/api messaging:worker",
     "test": "turbo run test:unit",
     "test:all": "pnpm test:unit && pnpm test:integration",
     "test:coverage": "turbo run test:coverage",
