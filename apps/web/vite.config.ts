@@ -10,6 +10,17 @@ export default defineConfig({
     },
   },
   test: {
+    coverage: {
+      exclude: ['src/main.tsx', 'src/test/**'],
+      provider: 'v8',
+      reporter: ['text', 'lcov'],
+      thresholds: {
+        branches: 70,
+        functions: 70,
+        lines: 70,
+        statements: 70,
+      },
+    },
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.ts',

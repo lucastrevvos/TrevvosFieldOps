@@ -9,7 +9,10 @@
     "dev": "vite",
     "lint": "eslint src --max-warnings=0",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "pnpm test:unit",
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run --passWithNoTests src/**/*.integration.test.tsx",
+    "test:unit": "vitest run --exclude src/**/*.integration.test.tsx",
     "typecheck": "tsc -b --pretty false"
   },
   "dependencies": {
@@ -30,6 +33,7 @@
     "jsdom": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
     "vitest": "catalog:"
   }
 }
