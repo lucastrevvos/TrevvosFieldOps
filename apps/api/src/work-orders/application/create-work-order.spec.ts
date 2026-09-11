@@ -16,17 +16,20 @@ describe('CreateWorkOrder', () => {
     const repository = new RecordingRepository();
     const useCase = new CreateWorkOrder(repository);
 
-    const result = await useCase.execute({
-      address: {
-        city: 'Florianópolis',
-        line1: 'Rua das Gaivotas, 120',
-        postalCode: '88058-500',
-        state: 'SC',
+    const result = await useCase.execute(
+      {
+        address: {
+          city: 'Florianópolis',
+          line1: 'Rua das Gaivotas, 120',
+          postalCode: '88058-500',
+          state: 'SC',
+        },
+        priority: 'NORMAL',
+        scheduledFor: new Date(Date.now() + 3_600_000),
+        title: 'Inspect refrigeration unit',
       },
-      priority: 'NORMAL',
-      scheduledFor: new Date(Date.now() + 3_600_000),
-      title: 'Inspect refrigeration unit',
-    });
+      'c0a80121-7ac0-4cae-8f91-62c439e8369d',
+    );
 
     expect(repository.saved).toHaveLength(1);
     expect(result.status).toBe('PENDING_DISPATCH');
@@ -37,12 +40,15 @@ describe('CreateWorkOrder', () => {
     const useCase = new CreateWorkOrder(repository);
 
     await expect(
-      useCase.execute({
-        address: { city: 'Florianópolis', line1: 'Street', postalCode: '88058-500', state: 'SC' },
-        priority: 'NORMAL',
-        scheduledFor: new Date(Date.now() - 1_000),
-        title: 'Invalid schedule',
-      }),
+      useCase.execute(
+        {
+          address: { city: 'Florianópolis', line1: 'Street', postalCode: '88058-500', state: 'SC' },
+          priority: 'NORMAL',
+          scheduledFor: new Date(Date.now() - 1_000),
+          title: 'Invalid schedule',
+        },
+        'c0a80121-7ac0-4cae-8f91-62c439e8369d',
+      ),
     ).rejects.toThrow('Scheduled time must be in the future.');
     expect(repository.saved).toHaveLength(0);
   });
