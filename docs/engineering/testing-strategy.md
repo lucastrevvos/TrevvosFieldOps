@@ -46,5 +46,6 @@ a percentage.
 
 PostgreSQL fidelity matters for the work-order repository because it owns parameterized SQL and an
 atomic work-order/audit-event transaction. Testcontainers therefore starts the same PostgreSQL
-major version used locally. Redis and RabbitMQ containers will be introduced when production code
-first depends on their protocol behavior, avoiding slow containers without a real integration seam.
+major version used locally. RabbitMQ integration tests use the production topology to demonstrate
+temporary failure recovery, idempotent duplicate handling and dead-letter routing. Redis will be
+introduced only when production code first depends on its protocol behavior.

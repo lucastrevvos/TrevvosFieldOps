@@ -1,10 +1,9 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import { Pool } from 'pg';
 import { GenericContainer, type StartedTestContainer, Wait } from 'testcontainers';
 
 import { WorkOrder } from '../src/work-orders/domain/work-order.js';
 import { PostgresWorkOrderRepository } from '../src/work-orders/infrastructure/postgres-work-order.repository.js';
+import { runMigrations } from '../src/infrastructure/database/run-migrations.js';
 
 describe('PostgresWorkOrderRepository with PostgreSQL', () => {
   let container: StartedTestContainer | undefined;
@@ -29,11 +28,7 @@ describe('PostgresWorkOrderRepository with PostgreSQL', () => {
       port: container.getMappedPort(5432),
       user: 'fieldops_test',
     });
-    const migration = await readFile(
-      join(process.cwd(), 'src/infrastructure/database/migrations/001-create-work-orders.sql'),
-      'utf8',
-    );
-    await pool.query(migration);
+    await runMigrations(pool);
   });
 
   afterAll(async () => {
@@ -59,7 +54,8 @@ describe('PostgresWorkOrderRepository with PostgreSQL', () => {
       new Date('2026-09-11T12:00:00.000Z'),
     );
 
-    await repository.saveWithInitialAuditEvent(workOrder);
+    const correlationId = 'c0a80121-7ac0-4cae-8f91-62c439e8369d';
+    await repository.saveWithInitialAuditEvent(workOrder, correlationId);
 
     const props = workOrder.toPrimitives();
     const savedOrder = await pool.query<{ id: string; status: string }>(
@@ -70,7 +66,14 @@ describe('PostgresWorkOrderRepository with PostgreSQL', () => {
       'SELECT event_type FROM audit_events WHERE aggregate_id = $1',
       [props.id],
     );
+    const outboxEvents = await pool.query<{ correlation_id: string; event_type: string }>(
+      'SELECT correlation_id, event_type FROM outbox_events WHERE aggregate_id = $1',
+      [props.id],
+    );
     expect(savedOrder.rows).toEqual([{ id: props.id, status: 'PENDING_DISPATCH' }]);
     expect(savedEvents.rows).toEqual([{ event_type: 'WorkOrderCreated' }]);
+    expect(outboxEvents.rows).toEqual([
+      { correlation_id: correlationId, event_type: 'WorkOrderCreated.v1' },
+    ]);
   });
 });

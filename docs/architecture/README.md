@@ -38,3 +38,4 @@ Significant decisions use the [ADR template](adr/0000-template.md). An ADR descr
 | ------------------------------------------------------- | ---------------------------------- | -------- |
 | [ADR-0001](adr/0001-monorepo-and-package-strategy.md)   | Use pnpm workspaces with Turborepo | Accepted |
 | [ADR-0002](adr/0002-work-order-persistence-boundary.md) | Modular slice with explicit SQL    | Accepted |
+| [ADR-0003](adr/0003-at-least-once-event-delivery.md)    | At-least-once outbox delivery      | Accepted |

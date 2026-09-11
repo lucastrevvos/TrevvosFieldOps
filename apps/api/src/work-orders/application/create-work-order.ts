@@ -11,9 +11,9 @@ export class CreateWorkOrder {
     private readonly repository: WorkOrderRepository,
   ) {}
 
-  async execute(input: CreateWorkOrderProps): Promise<WorkOrderProps> {
+  async execute(input: CreateWorkOrderProps, correlationId: string): Promise<WorkOrderProps> {
     const workOrder = WorkOrder.create(input);
-    await this.repository.saveWithInitialAuditEvent(workOrder);
+    await this.repository.saveWithInitialAuditEvent(workOrder, correlationId);
     return workOrder.toPrimitives();
   }
 }
