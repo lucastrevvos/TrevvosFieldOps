@@ -46,9 +46,12 @@ describe('PostgresWorkOrderRepository', () => {
     const client = new RecordingClient();
     const repository = new PostgresWorkOrderRepository(poolFor(client));
 
-    await repository.saveWithInitialAuditEvent(validWorkOrder());
+    await repository.saveWithInitialAuditEvent(
+      validWorkOrder(),
+      'c0a80121-7ac0-4cae-8f91-62c439e8369d',
+    );
 
-    expect(client.statements).toEqual(['BEGIN', 'INSERT', 'INSERT', 'COMMIT']);
+    expect(client.statements).toEqual(['BEGIN', 'INSERT', 'INSERT', 'INSERT', 'COMMIT']);
     expect(client.released).toBe(1);
   });
 
@@ -56,9 +59,12 @@ describe('PostgresWorkOrderRepository', () => {
     const client = new RecordingClient(true);
     const repository = new PostgresWorkOrderRepository(poolFor(client));
 
-    await expect(repository.saveWithInitialAuditEvent(validWorkOrder())).rejects.toThrow(
-      'database unavailable',
-    );
+    await expect(
+      repository.saveWithInitialAuditEvent(
+        validWorkOrder(),
+        'c0a80121-7ac0-4cae-8f91-62c439e8369d',
+      ),
+    ).rejects.toThrow('database unavailable');
     expect(client.statements).toEqual(['BEGIN', 'INSERT', 'ROLLBACK']);
     expect(client.released).toBe(1);
   });
