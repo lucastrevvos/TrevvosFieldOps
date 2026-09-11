@@ -28,7 +28,8 @@ before installing dependencies.
 | `pnpm build`      | Build all workspace projects in dependency order |
 | `pnpm lint`       | Run package lint tasks and verify formatting     |
 | `pnpm typecheck`  | Type-check every workspace project               |
-| `pnpm test`       | Run all automated tests                          |
+| `pnpm test`       | Run the fast unit and component suites           |
+| `pnpm test:all`   | Run unit and Docker-backed integration suites    |
 | `pnpm check`      | Run lint, type-check, tests and build            |
 | `pnpm format`     | Apply repository formatting                      |
 | `pnpm clean`      | Remove generated workspace artifacts             |
@@ -41,6 +42,12 @@ Start both development servers from the repository root:
 
 ```bash
 pnpm dev
+```
+
+In another terminal, start the outbox publisher and event consumer:
+
+```bash
+pnpm messaging:worker
 ```
 
 - Web: `http://localhost:5173`
@@ -105,6 +112,10 @@ curl --request POST http://localhost:3000/api/work-orders \
 
 Use a future value for `scheduledFor`. A successful request returns `201 Created`, the generated
 UUID, the creation timestamp and the initial `PENDING_DISPATCH` status.
+
+With the messaging worker running, the committed outbox event is published to RabbitMQ and creates
+one idempotent `READY_FOR_DISPATCH` job. Inspect broker queues at `http://localhost:15672`; poison
+messages eventually appear in `dispatch.work-order-created.v1.dead`.
 
 ## Troubleshooting
 
