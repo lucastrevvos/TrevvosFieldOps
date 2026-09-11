@@ -18,7 +18,8 @@ describe('PostgresWorkOrderRepository with PostgreSQL', () => {
         POSTGRES_USER: 'fieldops_test',
       })
       .withExposedPorts(5432)
-      .withWaitStrategy(Wait.forLogMessage(/database system is ready to accept connections/))
+      // The official image reports readiness once for initialization and once for the final server.
+      .withWaitStrategy(Wait.forLogMessage(/database system is ready to accept connections/, 2))
       .start();
 
     pool = new Pool({
