@@ -3,6 +3,7 @@ import {
   Catch,
   HttpException,
   HttpStatus,
+  Logger,
   type ExceptionFilter,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
@@ -19,6 +20,8 @@ interface ProblemDetails {
 
 @Catch()
 export class ProblemDetailsFilter implements ExceptionFilter {
+  private readonly logger = new Logger(ProblemDetailsFilter.name);
+
   catch(exception: unknown, host: ArgumentsHost): void {
     const response = host.switchToHttp().getResponse<Response>();
     const request = host.switchToHttp().getRequest<Request>();
@@ -28,6 +31,12 @@ export class ProblemDetailsFilter implements ExceptionFilter {
         : exception instanceof HttpException
           ? exception.getStatus()
           : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    if (status >= 500) {
+      const stack = exception instanceof Error ? exception.stack : String(exception);
+      this.logger.error(`Unhandled error for ${request.method} ${request.url}`, stack);
+    }
+
     const problem: ProblemDetails = {
       detail: this.getDetail(exception, status),
       instance: request.url,

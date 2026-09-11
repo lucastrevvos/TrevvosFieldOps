@@ -25,6 +25,7 @@
     "rxjs": "catalog:"
   },
   "devDependencies": {
+    "@jest/globals": "catalog:",
     "@nestjs/testing": "catalog:",
     "@trevvos-fieldops/eslint-config": "workspace:*",
     "@trevvos-fieldops/typescript-config": "workspace:*",
