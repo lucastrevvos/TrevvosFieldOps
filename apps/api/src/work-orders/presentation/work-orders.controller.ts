@@ -1,4 +1,5 @@
-import { Body, Controller, HttpCode, HttpStatus, Inject, Post } from '@nestjs/common';
+import { randomUUID } from 'node:crypto';
+import { Body, Controller, Headers, HttpCode, HttpStatus, Inject, Post } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiOperation, ApiProperty, ApiTags } from '@nestjs/swagger';
 
 import { CreateWorkOrder } from '../application/create-work-order.js';
@@ -26,14 +27,23 @@ export class WorkOrdersController {
   @ApiOperation({ summary: 'Create a field-service work order' })
   @ApiBody({ type: CreateWorkOrderDto })
   @ApiCreatedResponse({ type: CreatedWorkOrderResponse })
-  async create(@Body() body: CreateWorkOrderDto): Promise<CreatedWorkOrderResponse> {
-    const created: WorkOrderProps = await this.createWorkOrder.execute({
-      address: body.address,
-      description: body.description,
-      priority: body.priority,
-      scheduledFor: new Date(body.scheduledFor),
-      title: body.title,
-    });
+  async create(
+    @Body() body: CreateWorkOrderDto,
+    @Headers('x-correlation-id') suppliedCorrelationId?: string,
+  ): Promise<CreatedWorkOrderResponse> {
+    const correlationId = suppliedCorrelationId?.match(/^[0-9a-f-]{36}$/i)
+      ? suppliedCorrelationId
+      : randomUUID();
+    const created: WorkOrderProps = await this.createWorkOrder.execute(
+      {
+        address: body.address,
+        description: body.description,
+        priority: body.priority,
+        scheduledFor: new Date(body.scheduledFor),
+        title: body.title,
+      },
+      correlationId,
+    );
 
     return {
       createdAt: created.createdAt.toISOString(),
