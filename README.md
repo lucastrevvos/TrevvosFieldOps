@@ -14,5 +14,6 @@ Trevvos FieldOps is a practical engineering laboratory and a useful platform for
 - [Initial backlog](docs/product/backlog.md)
 - [Engineering workflow](docs/engineering/workflow.md)
 - [Local development](docs/engineering/local-development.md)
+- [Local infrastructure](docs/engineering/local-infrastructure.md)
 - [Architecture](docs/architecture/README.md)
 - [Contributing](CONTRIBUTING.md)

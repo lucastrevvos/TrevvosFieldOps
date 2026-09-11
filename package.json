@@ -15,6 +15,10 @@
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "infra:down": "docker compose down",
+    "infra:logs": "docker compose logs -f",
+    "infra:status": "docker compose ps",
+    "infra:up": "docker compose up -d --wait",
     "lint": "turbo run lint && prettier --check .",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"

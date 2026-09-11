@@ -5,6 +5,7 @@
 - Git
 - Node.js 24 LTS
 - pnpm 11
+- Docker Engine with Docker Compose v2
 
 The repository includes `.nvmrc` and the exact package manager release in the root
 `package.json`.
@@ -22,15 +23,17 @@ before installing dependencies.
 
 ## Root commands
 
-| Command          | Purpose                                          |
-| ---------------- | ------------------------------------------------ |
-| `pnpm build`     | Build all workspace projects in dependency order |
-| `pnpm lint`      | Run package lint tasks and verify formatting     |
-| `pnpm typecheck` | Type-check every workspace project               |
-| `pnpm test`      | Run all automated tests                          |
-| `pnpm check`     | Run lint, type-check, tests and build            |
-| `pnpm format`    | Apply repository formatting                      |
-| `pnpm clean`     | Remove generated workspace artifacts             |
+| Command           | Purpose                                          |
+| ----------------- | ------------------------------------------------ |
+| `pnpm build`      | Build all workspace projects in dependency order |
+| `pnpm lint`       | Run package lint tasks and verify formatting     |
+| `pnpm typecheck`  | Type-check every workspace project               |
+| `pnpm test`       | Run all automated tests                          |
+| `pnpm check`      | Run lint, type-check, tests and build            |
+| `pnpm format`     | Apply repository formatting                      |
+| `pnpm clean`      | Remove generated workspace artifacts             |
+| `pnpm infra:up`   | Start and await healthy local dependencies       |
+| `pnpm infra:down` | Stop local dependencies without deleting data    |
 
 ## Run the applications
 
@@ -70,6 +73,9 @@ with the same name from a registry.
 
 Copy `.env.example` only after an application documents the variables it needs. Never commit
 the resulting `.env` file or real credentials.
+
+See [local infrastructure](local-infrastructure.md) for service addresses, lifecycle commands,
+persistence and troubleshooting.
 
 ## Troubleshooting
 
