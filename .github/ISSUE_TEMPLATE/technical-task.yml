@@ -1,6 +1,6 @@
 name: Technical task
 description: Architecture, infrastructure, refactoring or engineering work
-title: "[TECH] "
+title: '[TECH] '
 labels: []
 body:
   - type: textarea
@@ -19,14 +19,14 @@ body:
     id: tasks
     attributes:
       label: Tasks
-      placeholder: "- [ ] Task"
+      placeholder: '- [ ] Task'
     validations:
       required: true
   - type: textarea
     id: acceptance
     attributes:
       label: Acceptance criteria
-      placeholder: "- [ ] Verifiable outcome"
+      placeholder: '- [ ] Verifiable outcome'
     validations:
       required: true
   - type: textarea

@@ -1,6 +1,6 @@
 name: Feature
 description: Deliver user-visible behavior
-title: "[FEATURE] "
+title: '[FEATURE] '
 labels: []
 body:
   - type: textarea
@@ -28,7 +28,7 @@ body:
     id: acceptance
     attributes:
       label: Acceptance criteria
-      placeholder: "- [ ] Given... when... then..."
+      placeholder: '- [ ] Given... when... then...'
     validations:
       required: true
   - type: textarea
