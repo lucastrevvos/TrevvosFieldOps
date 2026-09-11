@@ -32,6 +32,20 @@ before installing dependencies.
 | `pnpm format`    | Apply repository formatting                      |
 | `pnpm clean`     | Remove generated workspace artifacts             |
 
+## Run the applications
+
+Start both development servers from the repository root:
+
+```bash
+pnpm dev
+```
+
+- Web: `http://localhost:5173`
+- API health: `http://localhost:3000/api/health`
+
+Vite proxies browser requests from `/api` to the local NestJS server. The browser therefore uses
+the same relative API path that can later be routed by a production gateway.
+
 Turborepo may collect anonymous usage telemetry. It can be disabled in a development or CI
 environment according to its documented telemetry setting.
 
