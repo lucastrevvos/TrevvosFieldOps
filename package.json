@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "clean": "turbo run clean && rm -rf .turbo",
+    "db:migrate": "pnpm --filter @trevvos-fieldops/api db:migrate",
     "dev": "turbo run dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
