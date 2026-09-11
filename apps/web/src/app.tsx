@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { getApiHealth } from './api/health';
+import { WorkOrderForm } from './work-orders/work-order-form';
 
 type ConnectionState = 'checking' | 'connected' | 'unavailable';
 
@@ -36,38 +37,7 @@ export function App() {
       </header>
 
       <main>
-        <section className="hero" aria-labelledby="hero-title">
-          <p className="eyebrow">Operations workspace</p>
-          <h1 id="hero-title">Field work, clearly coordinated.</h1>
-          <p className="hero-copy">
-            Create service orders, dispatch the right professional and follow every operational
-            transition from one reliable workspace.
-          </p>
-          <div className="hero-actions">
-            <button type="button" disabled>
-              Create work order
-            </button>
-            <span>First workflow coming in the next delivery.</span>
-          </div>
-        </section>
-
-        <section className="capabilities" aria-label="Platform capabilities">
-          <article>
-            <span>01</span>
-            <h2>Dispatch</h2>
-            <p>Match incoming work with eligible field professionals.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h2>Traceability</h2>
-            <p>Keep every status transition and integration event auditable.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h2>Reliability</h2>
-            <p>Design for retries, duplicate delivery and observable failures.</p>
-          </article>
-        </section>
+        <WorkOrderForm />
       </main>
     </div>
   );
