@@ -3,6 +3,15 @@ module.exports = {
   clearMocks: true,
   collectCoverageFrom: ['src/**/*.ts', '!src/main.ts'],
   coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov'],
+  coverageThreshold: {
+    global: {
+      branches: 30,
+      functions: 40,
+      lines: 40,
+      statements: 40,
+    },
+  },
   extensionsToTreatAsEsm: ['.ts'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   moduleNameMapper: {
