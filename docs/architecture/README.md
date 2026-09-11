@@ -34,6 +34,6 @@ Synchronous REST communication is used when the caller needs an immediate result
 
 Significant decisions use the [ADR template](adr/0000-template.md). An ADR describes context, options, consequences and status rather than merely stating the chosen technology.
 
-| ADR | Decision | Status |
-| --- | --- | --- |
+| ADR                                                   | Decision                           | Status   |
+| ----------------------------------------------------- | ---------------------------------- | -------- |
 | [ADR-0001](adr/0001-monorepo-and-package-strategy.md) | Use pnpm workspaces with Turborepo | Accepted |

@@ -2,14 +2,14 @@
 
 ## Board states
 
-| State | Meaning |
-| --- | --- |
-| Backlog | Captured but not yet prepared |
-| Ready | Meets the Definition of Ready |
-| In Progress | Active implementation; one owner |
-| In Review | Pull Request open and awaiting review |
-| Testing | Implementation complete; validation pending |
-| Done | Acceptance criteria met and merged |
+| State       | Meaning                                     |
+| ----------- | ------------------------------------------- |
+| Backlog     | Captured but not yet prepared               |
+| Ready       | Meets the Definition of Ready               |
+| In Progress | Active implementation; one owner            |
+| In Review   | Pull Request open and awaiting review       |
+| Testing     | Implementation complete; validation pending |
+| Done        | Acceptance criteria met and merged          |
 
 ## Traceability chain
 
