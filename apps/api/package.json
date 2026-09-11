@@ -10,7 +10,10 @@
     "dev": "node --env-file-if-exists=../../.env --watch --import tsx src/main.ts",
     "lint": "eslint src test --max-warnings=0",
     "start": "node dist/main.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "test": "pnpm test:unit",
+    "test:coverage": "pnpm test:unit --coverage",
+    "test:integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config jest.integration.config.cjs --runInBand",
+    "test:unit": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config jest.unit.config.cjs --runInBand",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -40,6 +43,7 @@
     "supertest": "catalog:",
     "ts-jest": "catalog:",
     "tsx": "catalog:",
+    "testcontainers": "catalog:",
     "typescript": "catalog:"
   }
 }
